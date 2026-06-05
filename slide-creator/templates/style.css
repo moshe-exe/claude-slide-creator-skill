@@ -1,0 +1,12 @@
+/*
+ * Workaround for a bug in Slidev 0.49.x:
+ * The "Goto" dialog (press `g`) moves its container to -top-20 (-80px) when closed,
+ * but the internal autocomplete list (~720px tall with many slides) keeps rendering
+ * while `result.length > 0`, leaving it permanently visible on screen.
+ *
+ * Fix: hide the container when it's in the closed state (class `-top-20`).
+ */
+#slidev-goto-dialog[class~="-top-20"] {
+  visibility: hidden;
+  pointer-events: none;
+}

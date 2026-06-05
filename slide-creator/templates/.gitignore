@@ -1,0 +1,11 @@
+node_modules
+.DS_Store
+dist
+*.local
+.vite
+.slidev
+*.log
+
+# Output exports
+*.pdf
+!docs/**/*.pdf

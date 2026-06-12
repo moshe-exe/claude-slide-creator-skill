@@ -16,6 +16,7 @@ Each presentation is an independent Git repo. The skill handles creation, stylin
 | `/slide-creator approve <name>` | Tag `v1.0.0` and release (requires ≥ 2 review rounds) |
 | `/slide-creator polish <name>` | Optional visual review (layout, typography, spacing) |
 | `/slide-creator illustrate <name>` | Add icons with shaped backgrounds, tinted with the palette (optional) |
+| `/slide-creator qr <name> <url> [slug]` | Generate a QR code of a link as a deck asset (optional) |
 | `/slide-creator dev <name>` | Run the dev server |
 | `/slide-creator build <name>` | Build to `dist/` |
 | `/slide-creator export <name> [pdf\|pptx\|png]` | Export to PDF (default), PowerPoint, or PNG |
@@ -46,6 +47,7 @@ Each presentation is an independent Git repo. The skill handles creation, stylin
    - [`gh`](https://cli.github.com/) (logged in)
    - `node` ≥ 20 and `npm`
    - Optionally, [Playwright Chromium](https://playwright.dev/) for PDF/PNG export (`npx playwright install chromium`)
+   - Optionally, for the `qr` command: [`segno`](https://segno.readthedocs.io) (`pip install segno`); `Pillow` too if you want rounded PNGs
 
 Restart Claude Code (or reload skills) and you should see `/slide-creator` in the slash command list.
 

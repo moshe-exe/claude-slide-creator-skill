@@ -1,7 +1,7 @@
 ---
 name: slide-creator
 description: Slidev presentation manager — each deck is its own GitHub repo with automatic deployment to GitHub Pages
-argument-hint: [list] | create <name> [--public|--private] | dev <name> | build <name> | export <name> | open <name>
+argument-hint: [list] | create <name> [--public|--private] | illustrate <name> | qr <name> <url> | dev <name> | build <name> | export <name> | open <name>
 allowed-tools:
   - Bash
   - Read
@@ -42,6 +42,7 @@ Edit these values to match your setup. Claude reads them at runtime — referenc
 | `/slide-creator approve <name>` | Mark as approved (requires ≥ 2 completed rounds) |
 | `/slide-creator polish <name>` | Optional visual review (layout, typography, spacing) |
 | `/slide-creator illustrate <name>` | Add icons with shaped backgrounds (optional) |
+| `/slide-creator qr <name> <url> [slug]` | Generate a QR code of a link as a deck asset (optional) |
 | `/slide-creator dev <name>` | Run the dev server (`npm run dev`) |
 | `/slide-creator build <name>` | Static build to `dist/` |
 | `/slide-creator export <name> [pdf\|pptx\|png]` | Export to PDF (default), PowerPoint, or PNG |
@@ -179,6 +180,26 @@ Requires a defined palette (`style`) and is best run **after** `polish` (on a st
 The **conventions live in the skill** ([`icon-criteria.md`](icon-criteria.md)) — what's learned applies to every deck.
 
 → **Full mechanics (library, component, selection, shapes, flow):** [`illustrating.md`](illustrating.md)
+
+---
+
+## Command: qr
+
+**Trigger:** `/slide-creator qr <name> <url> [slug] [--brand] [--round] [--png]`
+
+Generates a QR code from a link and saves it **inside the deck's repo** (`<deck>/assets/qr/<slug>.svg`) as an asset ready to drop into `slides.md`. **Optional**, useful for contact, demo, or call-to-action slides.
+
+Engine: [`segno`](https://segno.readthedocs.io) (a Python dependency — see install note). Default **SVG** (vector). `--brand` tints the modules with the palette's `fg` (dark) role; `--round` gives rounded corners (card look). The asset is referenced with a **relative path** (`./assets/qr/...`) so it survives the GitHub Pages `--base`.
+
+```bash
+python3 <this skill folder>/generate_qr.py \
+  --url "<url>" --out <SLIDES_DIR>/<name>/assets/qr/<slug>.svg \
+  --dark "<hex-fg>" [--round]
+```
+
+> **Dependency:** requires `segno` (`pip install segno`, or `uv add segno`). The `--round --png` combo also needs `Pillow`.
+
+→ **Command flow, options, slide layouts (centered, columns, card), scannability:** [`qr.md`](qr.md)
 
 ---
 

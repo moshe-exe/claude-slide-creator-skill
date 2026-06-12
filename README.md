@@ -15,9 +15,10 @@ Each presentation is an independent Git repo. The skill handles creation, stylin
 | `/slide-creator review <name>` | Start or continue the next review round |
 | `/slide-creator approve <name>` | Tag `v1.0.0` and release (requires ≥ 2 review rounds) |
 | `/slide-creator polish <name>` | Optional visual review (layout, typography, spacing) |
+| `/slide-creator illustrate <name>` | Add icons with shaped backgrounds, tinted with the palette (optional) |
 | `/slide-creator dev <name>` | Run the dev server |
 | `/slide-creator build <name>` | Build to `dist/` |
-| `/slide-creator export <name>` | Export to PDF |
+| `/slide-creator export <name> [pdf\|pptx\|png]` | Export to PDF (default), PowerPoint, or PNG |
 | `/slide-creator open <name>` | Open the folder in your editor |
 
 ## Install

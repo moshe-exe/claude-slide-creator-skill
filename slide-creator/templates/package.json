@@ -6,7 +6,8 @@
   "scripts": {
     "build": "slidev build --base /{{NAME}}/",
     "dev": "slidev --open",
-    "export": "slidev export"
+    "export": "slidev export",
+    "export:pptx": "slidev export --format pptx"
   },
   "dependencies": {
     "@slidev/cli": "^0.49.0",

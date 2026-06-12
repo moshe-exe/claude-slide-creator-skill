@@ -41,9 +41,10 @@ Edit these values to match your setup. Claude reads them at runtime — referenc
 | `/slide-creator review <name>` | Start or continue the next review round |
 | `/slide-creator approve <name>` | Mark as approved (requires ≥ 2 completed rounds) |
 | `/slide-creator polish <name>` | Optional visual review (layout, typography, spacing) |
+| `/slide-creator illustrate <name>` | Add icons with shaped backgrounds (optional) |
 | `/slide-creator dev <name>` | Run the dev server (`npm run dev`) |
 | `/slide-creator build <name>` | Static build to `dist/` |
-| `/slide-creator export <name>` | Export to PDF |
+| `/slide-creator export <name> [pdf\|pptx\|png]` | Export to PDF (default), PowerPoint, or PNG |
 | `/slide-creator open <name>` | Open the folder in your editor |
 
 ---
@@ -120,13 +121,18 @@ Output lands in `dist/`. Show total directory size when done.
 
 ## Command: export
 
-**Trigger:** `/slide-creator export <name>`
+**Trigger:** `/slide-creator export <name> [pdf|pptx|png] [options]`
+
+Exports the deck via Slidev (Playwright). Default format: `pdf`. Also supports `pptx` (PowerPoint) and `png`.
 
 ```bash
-cd <SLIDES_DIR>/<name> && npm run export
+cd <SLIDES_DIR>/<name> && npm run export        # PDF (default)
+cd <SLIDES_DIR>/<name> && npm run export:pptx   # PowerPoint
 ```
 
-Generates a PDF at the project root. Show the path to the generated PDF.
+Generates the file at the deck root (`slides-export.pdf` / `.pptx`). Show the path to the generated file.
+
+→ **Formats, flags (`--range`, `--dark`, `--with-clicks`, `--scale`), note on PPTX as images, troubleshooting:** [`exporting.md`](exporting.md)
 
 ---
 
@@ -159,6 +165,20 @@ Takes screenshots via `slidev export --format png` (alternative: browser tools),
 **Criteria live in the skill** ([`polish-criteria.md`](polish-criteria.md)), not in the deck — what's learned on one deck applies to all of them. They start empty and grow with use.
 
 → **Full flow (setup, per-slide loop, modes, integrations):** [`polishing.md`](polishing.md)
+
+---
+
+## Command: illustrate
+
+**Trigger:** `/slide-creator illustrate <name> [--parallel]`
+
+**Optional** light illustration: adds icons (Phosphor via Iconify, already integrated in Slidev) over shaped backgrounds (circle, squircle) tinted with the deck's palette. Minimalist by design — few icons, high intention, chosen for what they mean relative to the content.
+
+Requires a defined palette (`style`) and is best run **after** `polish` (on a stable layout). Uses a reusable `IconBadge.vue` component as the single source of truth for badge styling. Like `polish`: screenshot-driven, sequential while conventions are being built, parallel once there are ≥ 5.
+
+The **conventions live in the skill** ([`icon-criteria.md`](icon-criteria.md)) — what's learned applies to every deck.
+
+→ **Full mechanics (library, component, selection, shapes, flow):** [`illustrating.md`](illustrating.md)
 
 ---
 
